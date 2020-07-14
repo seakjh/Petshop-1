@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.pet.model.admin.Admin" 			alias="Admin"/>
+		<typeAlias type="com.pet.model.category.Category" 	alias="Category"/>
+		<typeAlias type="com.pet.model.product.Product" 		alias="Product"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/pet/mybatis/AdminMapper.xml"/>
+		<mapper resource="com/pet/mybatis/CategoryMapper.xml"/>
+		<mapper resource="com/pet/mybatis/ProductMapper.xml"/>
+	</mappers>
+	
+</configuration>
+
+
+
+
+
+
+

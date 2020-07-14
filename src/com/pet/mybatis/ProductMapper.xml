@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Product">
+	
+	<!-- 조인 처리를 위한  ResultMap  
+		product 1건 : category 1 건 매핑 :  1:1관계 association
+	-->
+	<resultMap type="Product" id="categoryJoin">
+		<id column="product_id" 			property="product_id"/>
+		<result column="product_name" property="product_name"/>	
+		<result column="price" 				property="price"/>	
+		<result column="brand" 				property="brand"/>	
+		<result column="filename" 			property="filename"/>	
+		<association column="category_id" javaType="Category" property="category" select="Category.select"/>
+	</resultMap>
+	
+	<sql id="select">
+		select * from product
+	</sql>
+	
+	<select id="All" resultMap="categoryJoin">
+		<include refid="select"/> order by product_id desc
+	</select>	
+		
+	<select id="byId" parameterType="int" resultMap="categoryJoin">
+		<include refid="select"/>where product_id=#{product_id}
+	</select>
+	
+	<insert id="insert" parameterType="Product">
+		insert into product(product_id, category_id, product_name,price,brand,filename)
+		values(seq_product.nextval, #{category.category_id},#{product_name},#{price},#{brand},#{filename})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from product 
+		where product_id=#{product_id}
+	</delete>
+	
+	<update id="update" parameterType="Product">
+		update product set category_id=#{category.category_id}
+		, product_name=#{product_name}
+		, price=#{price}
+		, brand=#{brand}
+		, filename=#{filename}
+		where product_id=#{product_id} 
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

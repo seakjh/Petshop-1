@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 이 xml 은 서블릿이 보유한 빈컨텍스트가 아니라, 
+	톰켓이 가동될때 생성된 SerlvetContext가 보유한 빈컨텍스트이다
+	따라서, 모든 서블릿이 보유한 빈들이, 이 ServletContext 수준의
+	빈들을 공용으로 접근할 수 있다..그럼 어디에 쓰이나?
+	모든 컨트롤러가 공통으로사용하는 로직에 사용..주로  DB 연동 -->
+	
+	<!-- 스프링 jdbc 는 jndi를 접근할 수 있다  -->
+	<jee:jndi-lookup jndi-name="jdbc/oracle"
+		id="dataSource" 
+		resource-ref="true"/>
+	
+	<!-- 스프링 jdbc를 사용하는 이유는 트랜잭션 등을 지원하기 때문이므로
+	 지금 사용중인 퍼스스턴스 영역의 기술에 따라 알맞는 트랜잭션 매니져를 
+	 등록해야 한다..
+	 jdbc, mybatis,ibatis : DataSourceTransactionManager
+	 hibernate : HibernateTransactionManager
+	 -->		
+	 <bean id="dataSourceTransactionManager" 
+	 	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	 	p:dataSource-ref="dataSource"/>
+	 
+	 <!-- mybatis  연동 -->
+	 <bean id="sqlSessionFactoryBean" 
+	 	class="org.mybatis.spring.SqlSessionFactoryBean"
+	 	p:dataSource-ref="dataSource"
+	 	p:configLocation="classpath:com/pet/mybatis/config.xml"/>
+	 	
+	<bean id="sqlSessionTemplate" 
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- 데이터베이스 연동 관련 객체를 자동으로 등록하자 -->
+	<context:component-scan base-package="com.pet.model">
+	</context:component-scan>
+	
+				
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

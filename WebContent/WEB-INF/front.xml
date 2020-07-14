@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 공통 로직이 아니라, 요청을 처리하는 컨트롤러 관련 빈 객체만을 
+	등록할 예정 -->
+	
+	<!-- HandlerMapping  결정 : 
+	@어노테이션이 붙은 컨트롤러 클래스를 하위 컨트롤러로 결정짓는 객체-->
+	<bean id="handlerMapping" 
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>		
+	
+	
+	<!-- ViewResolver  결정 -->
+	<bean id="viewResolver" 
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/"
+		p:suffix=".jsp"/>	
+
+	<!-- 정적자원(image,html,css,js, 동영상..)까지 
+		DispatcherSerlvet이 요청을 처리하지 않게 하자 
+		따라서 아래의 태그를 등록하면, 다시 디폴트 서블릿이 정상화 된다..
+		-->
+	
+	
+		
+	<!-- 모든 컨트롤러를 일일이 등록하지 말고, 자동 등록을 이용해보자 -->
+	<context:component-scan base-package="com.pet.controller">
+	</context:component-scan>		
+		
+	<mvc:default-servlet-handler/>
+	<mvc:annotation-driven/>
+	
+	<!-- 파일업로드 빈 등록 -->
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+</beans>
+
+
+
+
+
+
+
+
