@@ -43,6 +43,34 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function(){
+
+});
+function del(product_id){
+	if(confirm("상품코드 "+product_id+" 를 삭제하시겠어요?")){
+		location.href="/shop/cart/del?product_id="+product_id;		
+	}
+}
+function removeAll(){
+	if(confirm("장바구니를 비우시겠어요?")){
+		location.href="/shop/cart/remove";		
+	}
+}
+function edit(product_id, id){
+	var n=id.split("_")[1];
+	var ea = document.getElementById("t_"+n).value;
+	if(confirm(product_id+"상품의 갯수를 "+ea+"개로 수정할래요?")){
+		location.href="/shop/cart/edit?product_id="+product_id+"&ea="+ea;
+	}
+}
+
+function buy(){
+	//결제 1단계 페이지 요청 
+	location.href="/shop/step1.jsp";
+}
+</script>
 </head>
 <body>
 <div id="header"> 
@@ -60,9 +88,14 @@ tr:nth-child(even) {
 		    <th>수량</th>
 		    <th>변경</th>
 		  </tr>
+		  <%int totalBuy=0;//총 구매금액 %>
 		  <%if(cartList!=null){%>
 		  <%for(int i=0;i<cartList.size();i++){%>
 		  <%Cart cart=cartList.get(i); %>
+		  <%
+		  	//가격*갯수 
+		  	totalBuy+=(cart.getPrice()*cart.getEa());
+		  %>
 		  <tr>
 		    <td><input type="checkbox"/></td>
 		    <td><img src="/data/<%=cart.getFilename()%>" width="45px"/></td>
@@ -75,11 +108,11 @@ tr:nth-child(even) {
 		    	</ul>
 		    </td>
 		    <td>
-		    	<input type="text" value="1"/>
+		    	<input type="text" id="t_<%=i%>" value="<%=cart.getEa()%>"/>
 		    </td>
 		    <td>
-		    	<input type="button" value="수정"/>
-		    	<input type="button" value="삭제"/>
+		    	<button id="bt_<%=i%>" onClick="edit(<%=cart.getProduct_id()%>, this.id)">수정</button>
+		    	<button onClick="del(<%=cart.getProduct_id()%>)">삭제</button>
 		    </td>
 		  </tr>
 		  <%} %>
@@ -88,6 +121,14 @@ tr:nth-child(even) {
 		    	장바구니가 비어있습니다.
 		    </td>
 		  <%} %>
+		  
+		  <tr>
+		  	<td colspan="4" style="text-align:right">총 <%=totalBuy %>원</td>
+		  	<td colspan="1">
+		  		<button onClick="removeAll()">장바구니 비우기</button>
+		  		<button onClick="buy()">구매하기</button>
+		  	</td>
+		  </tr>
 		</table>		
 	  
   </div>

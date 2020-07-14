@@ -1,7 +1,7 @@
 body {
 	margin:0;
 	padding:0;
-	background: url("../images/bg-body.gif");
+	background: url("/images/bg-body.gif");
 	background-repeat:repeat-x;
 }
 #page {
@@ -32,7 +32,7 @@ body {
 	width:107px;
 }
 #header ul.navigation li.active {
-	background:url("../images/menu.gif");
+	background:url("/images/menu.gif");
 	background-repeat:no-repeat;
 	background-position: 0 -160px;
 }
@@ -44,7 +44,7 @@ body {
 	font-weight:bold;
 	display:inline-block;
 	line-height:35px;
-	background:url("../images/menu-separator.gif");
+	background:url("/images/menu-separator.gif");
 	background-repeat:no-repeat;
 	background-position:right;
 	height:35px;
@@ -58,7 +58,7 @@ body {
 /**------------- Start of body style ----------------**/
   
   #body div.banner {
-	background:url("../images/dog.jpg");
+	background:url("/images/dog.jpg");
 	background-position:center;
 	background-repeat:no-repeat;
 	height:606px;
@@ -167,19 +167,19 @@ body {
 	width:640px;
 }
 #body #content .content ul.articles li {
-	background:url("../images/bg-blog-bottom-curve.gif");
+	background:url("/images/bg-blog-bottom-curve.gif");
 	background-position: left bottom;
 	background-repeat:no-repeat;
 }
 #body #content .content ul.articles li div {
 	height:98px;
 	line-height:78px;
-	background:url("../images/bg-blog-heading.gif");
+	background:url("/images/bg-blog-heading.gif");
 	background-position: top center;
 	background-repeat:no-repeat;
 }
 #body #content .content ul.articles li p {
-	background:url("../images/bg-blog-content.gif");
+	background:url("/images/bg-blog-content.gif");
 	background-position: left;
 	background-repeat:repeat-y;
 	margin:-10px 0 8px 0;
@@ -209,7 +209,7 @@ body {
 	font-size:28px;
 }
 #body #content .content div a.old {
-	background:url("../images/top-border-short.gif");
+	background:url("/images/top-border-short.gif");
 	background-position: top center;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -226,7 +226,7 @@ body {
 	margin-top:25px;
 }
 #body #content .content div a.new {
-	background:url("../images/top-border-short.gif");
+	background:url("/images/top-border-short.gif");
 	background-position: top center;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -249,7 +249,7 @@ body {
 	color:#000000;
 }
 #body #content .content ul.articles li a.heart {
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 5px -374px;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -260,7 +260,7 @@ body {
 	  */
 	}
 #body #content .content ul.articles li a.facebook {
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 0 -124px;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -271,7 +271,7 @@ body {
 	   
 	}
 #body #content .content ul.articles li a.twitter {
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 0 -534px;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -286,7 +286,7 @@ body {
   
   
   #body #content .search {
-	background:url("../images/bg-search-form2.gif");
+	background:url("/images/bg-search-form2.gif");
 	background-position:center;
 	background-repeat:no-repeat;
 	width:540px;
@@ -296,7 +296,7 @@ body {
 	margin-bottom:80px;
 }
 #body #content .search input {
-	background:url("../images/input-search2.gif");
+	background:url("/images/input-search2.gif");
 	background-position:center;
 	background-repeat:no-repeat;
 	width:420px;
@@ -308,7 +308,7 @@ body {
 	color:#7f7154;
 }
 #body #content .search button {
-	background:url("../images/buttons.gif");
+	background:url("/images/buttons.gif");
 	background-position: 0 -270px;
 	background-repeat:no-repeat;
 	width:77px;
@@ -454,7 +454,7 @@ body {
 }
 #body #content .content .paging {
 	margin:0 0 20px 40px;
-	background:url("../images/border-dotted.gif");
+	background:url("/images/border-dotted.gif");
 	background-position:top;
 	background-repeat:repeat-x;
 	width:480px;
@@ -466,7 +466,7 @@ body {
 	font-family:"Myriad Pro";
 	color:#ffffff;
 	text-align:center;
-	background:url("../images/buttons.gif");
+	background:url("/images/buttons.gif");
 	background-position: 0 -90px;
 	background-repeat:repeat-x;
 	height:40px;
@@ -479,12 +479,12 @@ body {
 	color:#000000;
 }
 #body #content .content .paging a.active {
-	background:url("../images/buttons.gif");
+	background:url("/images/buttons.gif");
 	background-position: 0 0;
 	background-repeat:repeat-x;
 }
 #body #content .content .paging a.next {
-	background:url("../images/buttons.gif");
+	background:url("/images/buttons.gif");
 	background-position: 0 -180px;
 	background-repeat:repeat-x;
 	height:40px;
@@ -502,7 +502,7 @@ body {
 	background-image:none;
 }
 #body #content #sidebar div#section {
-	background:url("../images/bg-sidebar-heading.gif");
+	background:url("/images/bg-sidebar-heading.gif");
 	background-position:top center;
 	background-repeat:no-repeat;
 	height:auto;
@@ -510,14 +510,14 @@ body {
 	margin-top:80px;
 }
 #body #content #sidebar div#section div {
-	background:url("../images/bg-sidebar-bottom-curve.gif");
+	background:url("/images/bg-sidebar-bottom-curve.gif");
 	background-position:bottom center;
 	background-repeat:no-repeat;
 	height:auto;
 	padding: 12px 4px 12px 4px;
 }
 #body #content #sidebar div#section div div {
-	background:url("../images/bg-sidebar.gif");
+	background:url("/images/bg-sidebar.gif");
 	background-position:center;
 	height:auto;
 	overflow:hidden;
@@ -549,7 +549,7 @@ body {
 	padding:0 0 0 30px;
 }
 #body #content #sidebar div#section div div ul.archive li {
-	background:url("../images/top-border-long.gif");
+	background:url("/images/top-border-long.gif");
 	background-position:top center;
 	background-repeat:no-repeat;
 }
@@ -558,7 +558,7 @@ body {
 	color:#7F7154;
 	font-size:18px;
 	font-family:"Myriad Pro";
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 190px 20px;
 	background-repeat:no-repeat;
 	width:210px;
@@ -566,7 +566,7 @@ body {
 	color:#FF9D13;
 }
 #body #content #sidebar div#section div div ul.archive li a.active {
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 190px -42px;
 	background-repeat:no-repeat;
 	color:#FF9D13;
@@ -585,7 +585,7 @@ body {
 		* margin:0 0 50px -20px;
 		*padding-left:40px;
 		*/
-         background:url("../images/top-border-long.gif");
+         background:url("/images/top-border-long.gif");
 	background-position:top center;
 	background-repeat:no-repeat;
 }
@@ -610,7 +610,7 @@ body {
 	border:0;
 }
 #body #content #sidebar .search {
-	background:url("../images/bg-search-form.gif");
+	background:url("/images/bg-search-form.gif");
 	background-position:center;
 	background-repeat:no-repeat;
 	width:300px;
@@ -618,7 +618,7 @@ body {
 	margin:0;
 }
 #body #content #sidebar .search input {
-	background:url("../images/input-search.gif");
+	background:url("/images/input-search.gif");
 	background-position:center;
 	background-repeat:no-repeat;
 	width:190px;
@@ -630,7 +630,7 @@ body {
 	color:#7f7154;
 }
 #body #content #sidebar .search button {
-	background:url("../images/buttons.gif");
+	background:url("/images/buttons.gif");
 	background-position: 0 -270px;
 	background-repeat:no-repeat;
 	width:77px;
@@ -654,7 +654,7 @@ body {
 	margin-top:30px;
 }
 #body #content #sidebar .section .aside {
-	background:url("../images/bg-sidebar-top.gif");
+	background:url("/images/bg-sidebar-top.gif");
 	background-position:center top;
 	background-repeat:no-repeat;
 	width:300px;
@@ -664,7 +664,7 @@ body {
 }
 #body #content #sidebar .section .aside div {
 	width:300px;
-	background:url("../images/bg-sidebar-bottom.gif");
+	background:url("/images/bg-sidebar-bottom.gif");
 	background-position:center bottom;
 	background-repeat:no-repeat;
 	padding-bottom:4px;
@@ -673,7 +673,7 @@ body {
 #body #content #sidebar .section .aside div div {
 	width:282px;
 	padding: 0 9px 0 9px;
-	background:url("../images/bg-sidebar-mid.gif");
+	background:url("/images/bg-sidebar-mid.gif");
 	background-position:center;
 	height:auto;
 }
@@ -683,7 +683,7 @@ body {
 	padding:0;
 }
 #body #content #sidebar .section .aside div div ul li {
-	background:url("../images/bg-list-item.gif");
+	background:url("/images/bg-list-item.gif");
 	background-position:center bottom;
 	background-repeat:no-repeat;
 	clear:both;
@@ -728,7 +728,7 @@ body {
 	float:left;
 	width:140px;
 	height:30px;
-	background:url("../images/menu.gif");
+	background:url("/images/menu.gif");
 	background-position: 0 0;
 	background-repeat:no-repeat;
 }
@@ -736,7 +736,7 @@ body {
 	float:left;
 	width:140px;
 	height:30px;
-	background:url("../images/menu.gif");
+	background:url("/images/menu.gif");
 	background-position: 0 -80px;
 	background-repeat:no-repeat;
 	text-align:center;
@@ -778,7 +778,7 @@ body {
 	width:300px;
 	height:170px;
 	margin: 10px 0;
-	background: url("../images/shadow.gif");
+	background: url("/images/shadow.gif");
 	background-repeat:no-repeat;
 	background-position:bottom center;
 	overflow:visible;
@@ -845,7 +845,7 @@ body {
 #body #content #sidebar .connect ul li {
 	clear:both;
 	height:70px;
-	background: url("../images/top-border-short.gif");
+	background: url("/images/top-border-short.gif");
 	background-repeat:no-repeat;
 	background-position: 10px bottom;
 }
@@ -857,7 +857,7 @@ body {
 	color:#93898a;
 }
 #body #content #sidebar .connect ul li a.facebook {
-	background: url("../images/icons.gif");
+	background: url("/images/icons.gif");
 	background-position: 0 -174px;
 	background-repeat:no-repeat;
 }
@@ -866,7 +866,7 @@ body {
 	filter:alpha(opacity=80);
 }
 #body #content #sidebar .connect ul li a.subscribe {
-	background: url("../images/icons.gif");
+	background: url("/images/icons.gif");
 	background-position: 0 -428px;
 	background-repeat:no-repeat;
 }
@@ -875,7 +875,7 @@ body {
 	filter:alpha(opacity=80);
 }
 #body #content #sidebar .connect ul li a.twitter {
-	background: url("../images/icons.gif");
+	background: url("/images/icons.gif");
 	background-repeat:no-repeat;
 	background-position: 0 -588px;
 }
@@ -884,7 +884,7 @@ body {
 	filter:alpha(opacity=80);
 }
 #body #content #sidebar .connect ul li a.flicker {
-	background: url("../images/icons.gif");
+	background: url("/images/icons.gif");
 	background-repeat:no-repeat;
 	background-position: 0 -268px;
 }
