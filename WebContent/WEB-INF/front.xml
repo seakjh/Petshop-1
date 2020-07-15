@@ -40,6 +40,21 @@
 	<!-- 파일업로드 빈 등록 -->
 	<bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<!-- responbody 응답시 한글처리  -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean 
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=utf-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>		
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 </beans>
 
 

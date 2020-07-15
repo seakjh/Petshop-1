@@ -7,6 +7,11 @@
 		values(seq_member.nextval, #{id}, #{password}, #{name}, #{email}, #{phone})
 	</insert>
 	
+	<select id="loginCheck" parameterType="Member" resultType="Member">
+		select * from member 
+		where id=#{id} and password=#{password}
+	</select>
+	
 </mapper>
 
 

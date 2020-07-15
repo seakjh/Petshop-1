@@ -4,16 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.pet.model.admin.Admin" 			alias="Admin"/>
-		<typeAlias type="com.pet.model.category.Category" 	alias="Category"/>
-		<typeAlias type="com.pet.model.product.Product" 		alias="Product"/>
-		<typeAlias type="com.pet.model.member.Member" 	alias="Member"/>
+		<typeAlias type="com.pet.model.admin.Admin" 				alias="Admin"/>
+		<typeAlias type="com.pet.model.category.Category" 			alias="Category"/>
+		<typeAlias type="com.pet.model.product.Product" 				alias="Product"/>
+		<typeAlias type="com.pet.model.member.Member" 			alias="Member"/>
+		<typeAlias type="com.pet.model.order.OrderSummary" 		alias="OrderSummary"/>
+		<typeAlias type="com.pet.model.receiver.Receiver" 			alias="Receiver"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/pet/mybatis/AdminMapper.xml"/>
 		<mapper resource="com/pet/mybatis/CategoryMapper.xml"/>
 		<mapper resource="com/pet/mybatis/ProductMapper.xml"/>
 		<mapper resource="com/pet/mybatis/MemberMapper.xml"/>
+		<mapper resource="com/pet/mybatis/OrderSummaryMapper.xml"/>
+		<mapper resource="com/pet/mybatis/ReceiverMapper.xml"/>
 	</mappers>
 	
 </configuration>

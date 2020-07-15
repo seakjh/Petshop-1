@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Receiver">
+	
+	<!-- 배송자 정보를 입력후, ordersummary에서 가져갈 pk를 반환해야 함 -->
+<insert id="insert" parameterType="Receiver">
+	insert into receiver(receiver_id, rname,rphone,raddr)
+	values(seq_receiver.nextval,#{rname},#{rphone},#{raddr})
+	
+	<selectKey keyColumn="receiver_id" 
+		order="AFTER" keyProperty="receiver_id" resultType="int">
+		select seq_receiver.currval as receiver_id from dual
+	</selectKey>
+	
+</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -68,7 +68,7 @@ function edit(product_id, id){
 
 function buy(){
 	//결제 1단계 페이지 요청 
-	location.href="/shop/step1.jsp";
+	location.href="/shop/step1";
 }
 </script>
 </head>

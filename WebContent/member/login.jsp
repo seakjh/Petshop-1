@@ -6,7 +6,8 @@
 <meta charset="utf-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="/css/style.css" rel="stylesheet" type="text/css">
+
+<%@ include file="/include/head.jsp" %>
 <style>
 body {
 	font-family: Arial, Helvetica, sans-serif;
@@ -137,17 +138,30 @@ input[type=button]:hover {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(function() {
-		//로그인 버튼 누르면...
-		$("input[type='button']").click(function() {
-			$("form").attr({
-				"action" : "/admin/login",
-				"method" : "post"
-			});
-			$("form").submit();
-
-		});
+$(function() {
+	$("#bt_login").on("click", function(){
+		$.ajax({
+			"url":"/member/login",
+			"type":"post", 
+			"data":{
+				"id":$("input[name='id']").val() , 
+				"password":$("input[name='password']").val()
+			},
+			success:function(result){
+				//console.log(result.code);
+				
+				//성공한 경우
+				if(result.code==undefined){
+					alert(result.name+"님 안녕하세요 ");
+					location.href="/"; //메인을 요청!!
+				}else{//실패한 경우
+					alert(result.msg);				
+				}
+			}
+		});		
 	});
+
+});
 </script>
 </head>
 <body>
@@ -178,9 +192,10 @@ input[type=button]:hover {
 							<p>Or sign in manually:</p>
 						</div>
 
-						<input type="text" name="id" placeholder="Username" required>
-						<input type="password" name="password" placeholder="Password"
-							required> <input type="button" value="Login">
+						<input type="text" 		name="id"	 			placeholder="Username" required>
+						<input type="password" name="password" 	placeholder="Password"
+						
+							required> <input type="button" id="bt_login" value="Login">
 					</div>
 
 				</div>
