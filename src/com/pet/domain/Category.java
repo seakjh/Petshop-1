@@ -1,4 +1,4 @@
-package com.pet.model.category;
+package com.pet.domain;
 
 public class Category {
 	private int category_id;

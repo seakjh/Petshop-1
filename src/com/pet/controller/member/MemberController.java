@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pet.domain.Member;
 import com.pet.exception.DMLException;
 import com.pet.exception.DataNotFoundException;
-import com.pet.model.member.Member;
 import com.pet.model.member.MemberService;
 
 @Controller

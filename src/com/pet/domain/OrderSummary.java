@@ -1,7 +1,4 @@
-package com.pet.model.order;
-
-import com.pet.model.member.Member;
-import com.pet.model.receiver.Receiver;
+package com.pet.domain;
 
 public class OrderSummary {
 	private int order_summary_id;

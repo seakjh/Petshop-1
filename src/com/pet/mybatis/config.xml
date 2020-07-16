@@ -4,12 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.pet.model.admin.Admin" 				alias="Admin"/>
-		<typeAlias type="com.pet.model.category.Category" 			alias="Category"/>
-		<typeAlias type="com.pet.model.product.Product" 				alias="Product"/>
-		<typeAlias type="com.pet.model.member.Member" 			alias="Member"/>
-		<typeAlias type="com.pet.model.order.OrderSummary" 		alias="OrderSummary"/>
-		<typeAlias type="com.pet.model.receiver.Receiver" 			alias="Receiver"/>
+		<typeAlias type="com.pet.domain.Admin" 				alias="Admin"/>
+		<typeAlias type="com.pet.domain.Category" 				alias="Category"/>
+		<typeAlias type="com.pet.domain.Product" 				alias="Product"/>
+		<typeAlias type="com.pet.domain.Member" 				alias="Member"/>
+		<typeAlias type="com.pet.domain.OrderSummary"		alias="OrderSummary"/>
+		<typeAlias type="com.pet.domain.Receiver" 				alias="Receiver"/>
+		<typeAlias type="com.pet.domain.OrderDetail"			alias="OrderDetail"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/pet/mybatis/AdminMapper.xml"/>
@@ -18,6 +19,7 @@
 		<mapper resource="com/pet/mybatis/MemberMapper.xml"/>
 		<mapper resource="com/pet/mybatis/OrderSummaryMapper.xml"/>
 		<mapper resource="com/pet/mybatis/ReceiverMapper.xml"/>
+		<mapper resource="com/pet/mybatis/OrderDetailMapper.xml"/>
 	</mappers>
 	
 </configuration>

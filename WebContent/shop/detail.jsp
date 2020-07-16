@@ -1,4 +1,4 @@
-<%@page import="com.pet.model.product.Product"%>
+<%@page import="com.pet.domain.Product"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	Product product=(Product)request.getAttribute("product");
@@ -13,14 +13,12 @@
 .pic{
 	width:50%;
 	height:250px;
-	background:yellow;
 	float:left;
 	margin-top:50px;
 }
 .spec{
 	width:50%;
 	height:250px;
-	background:green;
 	float:left;
 	margin-top:50px;
 }
@@ -51,12 +49,17 @@ function goCart(){
 }
 
 function buy(){
-	
+	//장바구니 담기 요청 
+	$("form").attr({
+		"action":"/shop/buy",
+		"method":"post"
+	});
+	$("form").submit();	
 }
 </script>
 </head>
 <body>
-<div id="header"> <a href="#" id="logo"><img src="/images/logo.gif" width="310" height="114" alt=""></a>
+<div id="header"> 
 	<%@ include file="/include/main_navi.jsp" %>
 </div>
 <div id="body">
@@ -82,7 +85,7 @@ function buy(){
 		  	</ul>
 	  	</form> 
 	  	<button onClick="goCart()">장바구니</button>
-	  	<button>바로구매</button>
+	  	<button onClick="buy()">바로구매</button>
 	  </div> 
   </div>
   <div class="featured">

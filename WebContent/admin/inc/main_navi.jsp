@@ -1,4 +1,4 @@
-<%@page import="com.pet.model.admin.Admin"%>
+<%@page import="com.pet.domain.Admin"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	Admin admin=(Admin)session.getAttribute("admin");

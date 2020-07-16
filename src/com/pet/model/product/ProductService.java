@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pet.domain.Product;
 import com.pet.exception.DMLException;
 import com.pet.exception.FileException;
 import com.pet.model.common.file.FileManager;

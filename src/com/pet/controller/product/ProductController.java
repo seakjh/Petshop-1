@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.controller.common.Pager;
+import com.pet.domain.Product;
 import com.pet.exception.DMLException;
 import com.pet.exception.FileException;
 import com.pet.model.common.file.FileManager;
-import com.pet.model.product.Product;
 import com.pet.model.product.ProductService;
 
 @Controller

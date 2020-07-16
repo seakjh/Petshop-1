@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.pet.model.member.Member;
-import com.pet.model.order.OrderSummary;
-import com.pet.model.product.Cart;
-import com.pet.model.receiver.Receiver;
+import com.pet.domain.Cart;
+import com.pet.domain.Member;
+import com.pet.domain.OrderSummary;
+import com.pet.domain.Receiver;
 import com.pet.model.shopping.ShoppingService;
 
 @Controller
@@ -23,36 +23,45 @@ public class ShoppingController {
 	@Autowired
 	private ShoppingService shoppingService;
 	
-	//장바구니 담기!!
+	//장바구니 담기!! (세션 체크하기)
 	@RequestMapping(value="/shop/cart/regist",method=RequestMethod.POST)
 	public String regist(Model model, Cart cart, HttpSession session) {
-		List<Cart> cartList =(List)session.getAttribute("cartList");
 		
-		if(cartList==null) {//장바구니에 담을 리스트가 최초라면..
-			cartList = new ArrayList<Cart>();
-			session.setAttribute("cartList", cartList);
-		}
+		String view=null;
 		
-		int count=0;//존재여부를 체크하기 위한 카운터 변수(존재할 경우 0보다 큼)
-		Cart obj=null;
-		
-		//장바구니에 등록된 List내에 존재하는 제품인지 체크
-		for(int i=0;i<cartList.size();i++) {
-			obj = cartList.get(i);
-			//이미 존재하면
-			if(obj.getProduct_id()==cart.getProduct_id()) {
-				count++;
-				obj.setEa(obj.getEa()+1);
+		if(session.getAttribute("member")==null) {
+			model.addAttribute("msg", "로그인이 필요한 서비스입니다");
+			view="view/error";
+		}else{
+			List<Cart> cartList =(List)session.getAttribute("cartList");
+			
+			if(cartList==null) {//장바구니에 담을 리스트가 최초라면..
+				cartList = new ArrayList<Cart>();
+				session.setAttribute("cartList", cartList);
 			}
-		}
-		if(count==0) {//이미 존재함
-			cart.setEa(1);//상세보기에서 장바구니에 담을때는 1개가 된다!!
-			cartList.add(cart);//장바구니 리스트에 상품 추가!!
-		}
-		
-		model.addAttribute("msg", "장바구니에 "+cart.getProduct_name()+" 담겼습니다");
-		model.addAttribute("url", "/shop/cart/list");
-		return "view/message";
+			
+			int count=0;//존재여부를 체크하기 위한 카운터 변수(존재할 경우 0보다 큼)
+			Cart obj=null;
+			
+			//장바구니에 등록된 List내에 존재하는 제품인지 체크
+			for(int i=0;i<cartList.size();i++) {
+				obj = cartList.get(i);
+				//이미 존재하면
+				if(obj.getProduct_id()==cart.getProduct_id()) {
+					count++;
+					obj.setEa(obj.getEa()+1);
+				}
+			}
+			if(count==0) {//이미 존재함
+				cart.setEa(1);//상세보기에서 장바구니에 담을때는 1개가 된다!!
+				cartList.add(cart);//장바구니 리스트에 상품 추가!!
+			}
+			model.addAttribute("msg", "장바구니에 "+cart.getProduct_name()+" 담겼습니다");
+			model.addAttribute("url", "/shop/cart/list");
+			
+			view= "view/message";
+		};
+		return view;
 	}
 	
 	//장바구니 목록 가져오기!!
@@ -62,10 +71,10 @@ public class ShoppingController {
 		String view=null;
 		if(session.getAttribute("member")==null) {
 			model.addAttribute("msg", "로그인이 필요한 서비스입니다");
-			model.addAttribute("url", "/member/login.jsp");
-			view="view/message";
+			view="view/error";
 		}else{
 			//model.addAttribute("url", "/shop/cart/list");
+			//view="redirect:/shop/cart.jsp";
 			view="redirect:/shop/cart.jsp";
 		};
 		return view;
@@ -120,8 +129,12 @@ public class ShoppingController {
 	
 	//구매 1단계 화면 보기 (고객정보,결제정보 등 입력 페이지)
 	@RequestMapping(value="/shop/step1",method=RequestMethod.GET)
-	public String goStep1() {
+	public String goStep1(HttpSession session) {
 		//만일 db관련 작업이 잇다면 여기서 처리...
+		
+		//만일 cartOne 이라는 List가 세션에 존재한다면, 없애버리자
+		//왜?? cartList를 대체하지 않도록!!
+		session.removeAttribute("cartOne");
 		
 		return "shop/step1";
 	}
@@ -153,15 +166,42 @@ public class ShoppingController {
 		orderSummary.setMember(member);
 	
 		//서비스에게 일시키기 
-		shoppingService.insert(orderSummary);
+		List cartList =(List)session.getAttribute("cartList");
+		shoppingService.insert(cartList ,orderSummary);
 		
 		//장바구니 모두 비우기!!
+		session.removeAttribute("cartList");//장바구니 내역
+		session.removeAttribute("cartOne");//바로구매 내역
+		
 		//내일은 주문 상세도 service에서 처리할 것임!!
+		
 		
 		model.addAttribute("msg", "받을사람 정보는 "+orderSummary.getReceiver().getReceiver_id());
 		model.addAttribute("url", "/");
 		
 		return "view/message";
+	}
+	
+	//바로구매 요청 처리 (장바구니에 1건의 상품을 담는 처리)
+	@RequestMapping(value="/shop/buy",method=RequestMethod.POST)
+	public String buy(Model model, Cart cart, HttpSession session) {
+		
+		String view=null;
+		
+		if(session.getAttribute("member")==null) {
+			model.addAttribute("msg", "로그인이 필요한 서비스입니다");
+			view="view/error";
+		}else{
+			List<Cart> cartOne =(List)session.getAttribute("cartOne");
+			
+			if(cartOne==null) {//장바구니에 담을 리스트가 최초라면..
+				cartOne = new ArrayList<Cart>();
+				cartOne.add(cart);//장바구니에 한건 추가!!
+				session.setAttribute("cartOne", cartOne);
+			}
+			view= "redirect:/shop/step1";
+		};
+		return view;
 	}
 	
 	

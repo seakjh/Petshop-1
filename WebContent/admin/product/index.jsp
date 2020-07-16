@@ -1,5 +1,5 @@
 <%@page import="com.pet.controller.common.Pager"%>
-<%@page import="com.pet.model.product.Product"%>
+<%@page import="com.pet.domain.Product"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%

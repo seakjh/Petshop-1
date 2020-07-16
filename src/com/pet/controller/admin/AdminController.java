@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pet.model.admin.Admin;
+import com.pet.domain.Admin;
 import com.pet.model.admin.AdminService;
 
 @Controller

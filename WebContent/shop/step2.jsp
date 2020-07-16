@@ -1,7 +1,7 @@
-<%@page import="com.pet.model.order.OrderSummary"%>
-<%@page import="com.pet.model.product.Cart"%>
+<%@page import="com.pet.domain.OrderSummary"%>
+<%@page import="com.pet.domain.Cart"%>
 <%@page import="java.util.List"%>
-<%@page import="com.pet.model.product.Product"%>
+<%@page import="com.pet.domain.Product"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	List<Cart> cartList=(List)session.getAttribute("cartList");

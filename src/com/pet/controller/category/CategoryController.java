@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pet.domain.Category;
 import com.pet.exception.DMLException;
-import com.pet.model.category.Category;
 import com.pet.model.category.CategoryService;
 
 @Controller

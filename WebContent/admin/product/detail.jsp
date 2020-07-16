@@ -1,4 +1,4 @@
-<%@page import="com.pet.model.product.Product"%>
+<%@page import="com.pet.domain.Product"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	Product product = (Product)request.getAttribute("product");

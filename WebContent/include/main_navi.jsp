@@ -1,4 +1,4 @@
-<%@page import="com.pet.model.member.Member"%>
+<%@page import="com.pet.domain.Member"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	Member member = (Member)session.getAttribute("member");

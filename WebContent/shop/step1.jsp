@@ -1,10 +1,26 @@
-<%@page import="com.pet.model.product.Cart"%>
+<%@page import="com.pet.domain.Cart"%>
 <%@page import="java.util.List"%>
-<%@page import="com.pet.model.product.Product"%>
+<%@page import="com.pet.domain.Product"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
-	List<Cart> cartList=(List)session.getAttribute("cartList");
+	List<Cart> cartList=null;//결정 짓지 말자
+	
+	String uri = request.getHeader("Referer");
+	out.print("당신은 "+uri+" 에서 왔군요");
+	
+	//상세보기에서 넘어왔다면 바로구매다!
+	
+	//cart.jsp에서 넘어왔따면 이것은 장바구니를 통한 구매다!
+	
+	if(session.getAttribute("cartOne")!=null){//session cart 이름의 List 가 존재한다면 바로구매한것이다!
+		cartList=(List)session.getAttribute("cartOne");
+		out.print("바로구매 존재함");
+	}else{
+		cartList=(List)session.getAttribute("cartList");
+		out.print("cartList size is :"+cartList.size());
+	}
 	Member obj=(Member)session.getAttribute("member");
+	
 %>
 <!DOCTYPE html>
 <html>

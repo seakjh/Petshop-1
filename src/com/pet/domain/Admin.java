@@ -1,4 +1,4 @@
-package com.pet.model.admin;
+package com.pet.domain;
 
 public class Admin {
 	private int admin_id;

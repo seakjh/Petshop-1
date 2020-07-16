@@ -1,8 +1,6 @@
-package com.pet.model.product;
+package com.pet.domain;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import com.pet.model.category.Category;
 
 public class Product {
 	private int product_id;

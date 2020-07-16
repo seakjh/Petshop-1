@@ -1,4 +1,4 @@
-package com.pet.model.receiver;
+package com.pet.domain;
 
 public class Receiver {
 	//어떤 주문에 대한 받는자인지..

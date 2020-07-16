@@ -1,4 +1,4 @@
-package com.pet.model.member;
+package com.pet.domain;
 
 public class Member {
 	private int member_id;
