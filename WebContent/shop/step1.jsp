@@ -5,8 +5,8 @@
 <%
 	List<Cart> cartList=null;//결정 짓지 말자
 	
-	String uri = request.getHeader("Referer");
-	out.print("당신은 "+uri+" 에서 왔군요");
+	//String uri = request.getHeader("Referer");
+	//out.print("당신은 "+uri+" 에서 왔군요");
 	
 	//상세보기에서 넘어왔다면 바로구매다!
 	

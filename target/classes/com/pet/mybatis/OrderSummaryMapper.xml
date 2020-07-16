@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderSummary">
+	
+	<!-- 주문 요약은 회원,배송받는자 테이블과 조인이 필요하다  -->
+	<resultMap type="OrderSummary" id="joinMap">
+		<id column="order_summary_id" property="order_summary_id"/>
+		<result column="total_pay" property="total_pay"/>
+		<result column="order_date" property="order_date"/>
+		<association column="member_id" property="member" select="Member.select"/>		
+		<association column="receiver_id" property="receiver" select="Receiver.select"/>		
+		
+	</resultMap>
 
 	<insert id="insert" parameterType="OrderSummary">
 		insert into order_summary(order_summary_id
-		,member_id, total_pay,pay_method,same,receiver_id)
+		,member_id, total_pay,pay_method,receiver_id)
 		values(seq_order_summary.nextval,
-		#{member.member_id},#{total_pay},#{pay_method}
-		,#{same},#{receiver.receiver_id})
+		#{member.member_id},#{total_pay},#{pay_method},#{receiver.receiver_id})
 		
 		<!-- 주문요약이 등록되면, 주문상세 테이블에서 참조할 pk를 반환해야
 		하기 때문에  -->
@@ -20,14 +29,14 @@
 			from dual
 		</selectKey>
 	</insert>
+	
+			
 		
+	<select id="selectAll" resultMap="joinMap">
+		select * from order_summary 
+		order by order_summary_id desc
+	</select>		
 </mapper>
-
-
-
-
-
-
 
 
 

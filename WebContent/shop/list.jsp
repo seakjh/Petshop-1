@@ -1,6 +1,6 @@
 <%@page import="com.pet.controller.common.Pager"%>
-<%@page import="com.pet.domain.Product"%>
 <%@page import="java.util.List"%>
+<%@page import="com.pet.domain.Product"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	List<Product> productList=(List)request.getAttribute("productList");
@@ -9,15 +9,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/css/admin.css"/>
+<title>Pet Shop</title>
+<meta charset="utf-8">
+<link href="/css/style.css" rel="stylesheet" type="text/css">
 <style>
+.pic{
+	width:50%;
+	height:250px;
+	background:yellow;
+	float:left;
+	margin-top:50px;
+}
+.spec{
+	width:50%;
+	height:250px;
+	background:green;
+	float:left;
+	margin-top:50px;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
   border: 1px solid #ddd;
+  margin-top:50px;
 }
 
 th, td {
@@ -31,16 +46,17 @@ tr:nth-child(even) {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function getDetail(product_id){
-	//상세보기 요청 
-	location.href="/admin/product/detail?product_id="+product_id;
-}
+
 </script>
 </head>
 <body>
-
-<%@include file="/admin/inc/main_navi.jsp"%>
-<div class="container">
+<div id="header"> 
+	<%@ include file="/include/main_navi.jsp" %>
+</div>
+<div id="body">
+  <div id="content">
+		<!-- 장바구니 표 -->
+		<h2>상품목록</h2>
 <table>
   <tr>
     <th>No</th>
@@ -74,16 +90,24 @@ function getDetail(product_id){
   	<td colspan="6" style="text-align:center">
   		<%for(int i=pager.getFirstPage();i<=pager.getLastPage();i++){%>
   		<%if(i>pager.getTotalPage())break; %>
-		<a href="/admin/product/list?currentPage=<%=i%>">[<%=i%>]</a>  		
+		<a href="/product/list?currentPage=<%=i%>">[<%=i%>]</a>  		
 		<%}%>
   	</td>
   </tr>
   
-</table>
-
+</table>	
+	  
+  </div>
+  <div class="featured">
+    <ul>
+      <li><a href="#"><img src="/images/organic-and-chemical-free.jpg" width="300" height="90" alt=""></a></li>
+      <li><a href="#"><img src="/images/good-food.jpg" width="300" height="90" alt=""></a></li>
+      <li class="last"><a href="#"><img src="/images/pet-grooming.jpg" width="300" height="90" alt=""></a></li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <%@ include file="/include/footer.jsp" %>
+</div>
 </body>
 </html>
-
-
-
-

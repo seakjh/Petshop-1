@@ -32,17 +32,8 @@ public class ShoppingService {
 		Receiver receiver = orderSummary.getReceiver();
 		
 		//받는 사람 정보 입력 
-		System.out.println("입력전의 receiver_id"+receiver.getReceiver_id());
-		System.out.println("입력후의 receiver_id"+receiver.getReceiver_id());
+		receiverDAO.insert(receiver);
 		
-		if(orderSummary.getSame().equals("yes")) {
-			//받을 사람이 회원인 경우엔 receiver_id는 member_id로 대체하면 된다!!
-			receiver.setReceiver_id(orderSummary.getMember().getMember_id());
-		}else {
-			//받을 사람이 회원이 아닌 경우엔 receiver_id에는 receiverDAO.insert
-			//후에 반환되는 pk.를 대체하면 된다!!
-			receiverDAO.insert(receiver);
-		}
 		//주문정보 입력
 		orderSummaryDAO.insert(orderSummary);
 		System.out.println("방금 들어간 주문코드는 "+orderSummary.getOrder_summary_id());

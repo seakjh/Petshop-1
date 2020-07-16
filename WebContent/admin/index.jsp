@@ -8,10 +8,6 @@
 </head>
 <body>
 <%@include file="/admin/inc/main_navi.jsp"%>
-<div style="padding-left:16px">
-  <h2>Top Navigation Example</h2>
-  <p>Some content..</p>
-</div>
 
 </body>
 </html>

@@ -1,8 +1,11 @@
 package com.pet.controller.shopping;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pet.controller.common.Pager;
 import com.pet.domain.Cart;
 import com.pet.domain.Member;
 import com.pet.domain.OrderSummary;
 import com.pet.domain.Receiver;
+import com.pet.model.product.ProductService;
 import com.pet.model.shopping.ShoppingService;
 
 @Controller
 public class ShoppingController {
 	@Autowired
 	private ShoppingService shoppingService;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private Pager pager;
 	
 	//장바구니 담기!! (세션 체크하기)
 	@RequestMapping(value="/shop/cart/regist",method=RequestMethod.POST)
@@ -129,13 +140,18 @@ public class ShoppingController {
 	
 	//구매 1단계 화면 보기 (고객정보,결제정보 등 입력 페이지)
 	@RequestMapping(value="/shop/step1",method=RequestMethod.GET)
-	public String goStep1(HttpSession session) {
+	public String goStep1(HttpSession session, HttpServletRequest request) {
 		//만일 db관련 작업이 잇다면 여기서 처리...
-		
-		//만일 cartOne 이라는 List가 세션에 존재한다면, 없애버리자
-		//왜?? cartList를 대체하지 않도록!!
-		session.removeAttribute("cartOne");
-		
+		String referer = request.getHeader("referer");
+		try {
+			URI uri=new URI(referer);
+			System.out.println(uri.getPath());
+			if(!uri.getPath().equals("/shop/detail")) {//바로구매가 아니라면
+				session.removeAttribute("cartOne");
+			}
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 		return "shop/step1";
 	}
 	
@@ -205,7 +221,23 @@ public class ShoppingController {
 	}
 	
 	
+	//쇼핑 상품 목록
+	@RequestMapping(value="/product/list",method=RequestMethod.GET)
+	public String getProductList(HttpServletRequest request,Model model) {
+		List productList = productService.selectAll();
+		
+		model.addAttribute("productList", productList);
+		model.addAttribute("pager", pager);//이거 넣기!!!
+
+		pager.init(productList, request);
+		
+		return "shop/list";
+	}
 }
+
+
+
+
 
 
 

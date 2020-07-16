@@ -6,9 +6,7 @@ public class OrderSummary {
 	private int total_pay;
 	private String order_date;
 	private String pay_method;
-	private String same;
 	private Receiver receiver;
-	
 	public int getOrder_summary_id() {
 		return order_summary_id;
 	}
@@ -38,12 +36,6 @@ public class OrderSummary {
 	}
 	public void setPay_method(String pay_method) {
 		this.pay_method = pay_method;
-	}
-	public String getSame() {
-		return same;
-	}
-	public void setSame(String same) {
-		this.same = same;
 	}
 	public Receiver getReceiver() {
 		return receiver;

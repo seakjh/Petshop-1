@@ -1,9 +1,10 @@
+<%@page import="com.pet.domain.OrderSummary"%>
 <%@page import="com.pet.controller.common.Pager"%>
 <%@page import="com.pet.domain.Product"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
-	List<Product> productList=(List)request.getAttribute("productList");
+	List<OrderSummary> orderList=(List)request.getAttribute("orderList");
 	Pager pager=(Pager)request.getAttribute("pager");
 %>
 <!DOCTYPE html>
@@ -38,40 +39,39 @@ function getDetail(product_id){
 </script>
 </head>
 <body>
-
 <%@include file="/admin/inc/main_navi.jsp"%>
-<div class="container">
+
 <table>
   <tr>
     <th>No</th>
-    <th>이미지</th>
-    <th>카테고리</th>
-    <th>상품명</th>
-    <th>가격</th>
-    <th>브랜드</th>
+    <th>주문자</th>
+    <th>주문금액</th>
+    <th>주문일시</th>
+    <th>결제방법</th>
+    <th>받는 사람</th>
   </tr>
   
  <%int curPos=pager.getCurPos(); %>	
  <%int num=pager.getNum(); %>	
   <%for(int i=1;i<pager.getPageSize();i++){%>
  <%if(num<1)break;%>	
-  <%Product product=productList.get(curPos++); %>
-  <tr onClick="getDetail(<%=product.getProduct_id()%>)">
+  <%OrderSummary orderSummary=orderList.get(curPos++); %>
+  <tr onClick="getDetail(<%=orderSummary.getOrder_summary_id()%>)">
     <td><%=num-- %></td>
-    <td><img src="/data/<%=product.getFilename()%>" width="35px"/></td>
-    <td><%=product.getCategory().getCategory_name()%></td>
-    <td><%=product.getProduct_name() %></td>
-    <td><%=product.getPrice() %></td>
-    <td><%=product.getBrand() %></td>
+	<td><%=orderSummary.getMember().getName() %></td>
+	<td><%=orderSummary.getTotal_pay() %></td>
+	<td><%=orderSummary.getOrder_date() %></td>
+	<td><%=orderSummary.getPay_method() %></td>
+	<td><%=orderSummary.getReceiver().getRname()%></td>
   </tr>
   <%} %>
   <tr>
-  	<td colspan="6" align="center">
+  	<td colspan="7" align="center">
   		<button onClick="location.href='/admin/product/registForm.jsp';">상품등록</button>
   	</td>
   </tr>
   <tr>
-  	<td colspan="6" style="text-align:center">
+  	<td colspan="7" style="text-align:center">
   		<%for(int i=pager.getFirstPage();i<=pager.getLastPage();i++){%>
   		<%if(i>pager.getTotalPage())break; %>
 		<a href="/admin/product/list?currentPage=<%=i%>">[<%=i%>]</a>  		

@@ -3,16 +3,22 @@
 <mapper namespace="Receiver">
 	
 	<!-- 배송자 정보를 입력후, ordersummary에서 가져갈 pk를 반환해야 함 -->
-<insert id="insert" parameterType="Receiver">
-	insert into receiver(receiver_id, rname,rphone,raddr)
-	values(seq_receiver.nextval,#{rname},#{rphone},#{raddr})
+	<insert id="insert" parameterType="Receiver">
+		insert into receiver(receiver_id, rname,rphone,raddr)
+		values(seq_receiver.nextval,#{rname},#{rphone},#{raddr})
+		
+		<selectKey keyColumn="receiver_id" 
+			order="AFTER" keyProperty="receiver_id" resultType="int">
+			select seq_receiver.currval as receiver_id from dual
+		</selectKey>
+		
+	</insert>
 	
-	<selectKey keyColumn="receiver_id" 
-		order="AFTER" keyProperty="receiver_id" resultType="int">
-		select seq_receiver.currval as receiver_id from dual
-	</selectKey>
 	
-</insert>
+	<select id="select" parameterType="int" resultType="Receiver">
+		select * from receiver
+		where receiver_id=#{receiver_id}
+	</select>	
 	
 </mapper>
 
