@@ -142,12 +142,18 @@ public class ShoppingController {
 	@RequestMapping(value="/shop/step1",method=RequestMethod.GET)
 	public String goStep1(HttpSession session, HttpServletRequest request) {
 		//만일 db관련 작업이 잇다면 여기서 처리...
+		//클라이언트가 어떤 페이지에서 요청을 시도했는지 , 이전 페이지 정보
 		String referer = request.getHeader("referer");
+		/*
+		 URL : http://localhost:7777/shop/detail
+		 URI : /shop/detail
+	   */
 		try {
-			URI uri=new URI(referer);
-			System.out.println(uri.getPath());
-			if(!uri.getPath().equals("/shop/detail")) {//바로구매가 아니라면
-				session.removeAttribute("cartOne");
+			URI uri=new URI(referer); //java.net.URI
+			
+			//바로구매가 아니라면
+			if(uri.getPath().equals("/shop/detail")==false) {
+				session.removeAttribute("cartOne");//바로구매 정보 삭제
 			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -166,6 +172,7 @@ public class ShoppingController {
 		System.out.println(receiver.getRname());
 		System.out.println(receiver.getRphone());
 		System.out.println(receiver.getRaddr());
+		System.out.println("session"+session);
 		
 		//jsp에서 보여질 정보 저장
 		model.addAttribute("orderSummary", orderSummary);
@@ -183,6 +190,12 @@ public class ShoppingController {
 	
 		//서비스에게 일시키기 
 		List cartList =(List)session.getAttribute("cartList");
+		
+		System.out.println("cartOne is "+session.getAttribute("cartOne"));
+		
+		if(session.getAttribute("cartOne")!=null) {
+			cartList = (List)session.getAttribute("cartOne");
+		}
 		shoppingService.insert(cartList ,orderSummary);
 		
 		//장바구니 모두 비우기!!
@@ -213,8 +226,10 @@ public class ShoppingController {
 			if(cartOne==null) {//장바구니에 담을 리스트가 최초라면..
 				cartOne = new ArrayList<Cart>();
 				cartOne.add(cart);//장바구니에 한건 추가!!
-				session.setAttribute("cartOne", cartOne);
+			}else {//이미 있다면
+				cartOne.removeAll(cartOne);
 			}
+			session.setAttribute("cartOne", cartOne);
 			view= "redirect:/shop/step1";
 		};
 		return view;

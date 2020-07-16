@@ -1,3 +1,4 @@
+<%@page import="com.pet.domain.Member"%>
 <%@page import="com.pet.domain.OrderSummary"%>
 <%@page import="com.pet.domain.Cart"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	List<Cart> cartList=(List)session.getAttribute("cartList");
+
+	if(session.getAttribute("cartOne")!=null){
+		cartList = (List)session.getAttribute("cartOne");
+	}
+	
 	Member obj=(Member)session.getAttribute("member");
 	OrderSummary orderSummary=(OrderSummary)request.getAttribute("orderSummary");
 	//out.print(orderSummary.getSame());
