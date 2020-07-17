@@ -32,9 +32,9 @@ tr:nth-child(even) {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function getDetail(product_id){
+function getDetail(order_summary_id){
 	//상세보기 요청 
-	location.href="/admin/product/detail?product_id="+product_id;
+	location.href="/admin/order/detail?order_summary_id="+order_summary_id;
 }
 </script>
 </head>

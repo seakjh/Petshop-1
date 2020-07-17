@@ -7,6 +7,7 @@
   <a class="active" href="#home">Home</a>
   <a href="/admin/category/index.jsp">카테고리 관리</a>
   <a href="/admin/product/list">상품관리</a>
+  <a href="/admin/event/list">기획상품 관리</a>
   <a href="/admin/member/list">회원정보</a>
   <a href="/admin/order/list">주문정보</a>
   <a href="/admin/cs/main">고객센터</a>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Event">
+	
+	<select id="selectAll" resultType="Event">
+		select * from event
+	</select>
+	
+	<select id="select" parameterType="int" resultType="Event">
+		select * from event where event_id=#{event_id}
+	</select>
+	
+	<insert id="insert" parameterType="Event">
+		insert into event(event_id, title)
+		values(seq_event.nextval, #{title})
+	</insert>
+	
+	<update id="update" parameterType="Event">
+		update event set title=#{title} 
+		where event_id=#{event_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from event where event_id=#{event_id}
+	</delete>
+	
+</mapper>
+
+

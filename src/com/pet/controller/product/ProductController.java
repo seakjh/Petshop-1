@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.controller.common.Pager;
+import com.pet.domain.Event;
+import com.pet.domain.EventProduct;
 import com.pet.domain.Product;
 import com.pet.exception.DMLException;
 import com.pet.exception.FileException;
@@ -54,10 +57,15 @@ public class ProductController {
 	@RequestMapping(value="/admin/product/list", method=RequestMethod.GET)
 	public ModelAndView selectAll(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		List productList = productService.selectAll();
+		
+		List productList = productService.selectAllJoin();
+		
+		List eventList = productService.getEvenetList();
+		
 		//페이징 처리 객체 
 		pager.init(productList, request);
 		mav.addObject("productList", productList);
+		mav.addObject("eventList", eventList);
 		mav.addObject("pager", pager);
 		
 		mav.setViewName("admin/product/index");
@@ -108,6 +116,72 @@ public class ProductController {
 		return "shop/detail";
 	}
 
+	/* 기획상품 관련 */
+	@RequestMapping(value="/event/list", method=RequestMethod.GET)
+	public String getEventList() {
+		return "event/list";
+	}
+	
+	/* 기획상품 관리 */
+	@RequestMapping(value="/admin/event/list", method=RequestMethod.GET)
+	public String getEventListAdmin() {
+		
+		return "admin/event/list";
+	}
+	
+	@RequestMapping(value="/admin/event/regist", method=RequestMethod.POST)
+	@ResponseBody
+	public String registEvent(Event event) {
+		String result=null;
+		try {
+			productService.registEvent(event);
+			result="ok";
+		} catch (DMLException e) {
+			e.printStackTrace();
+			result="fail";
+		}
+		return result;
+	}
+
+	@RequestMapping(value="/admin/event/selectall",method=RequestMethod.GET,produces="text/html;charset=utf8")
+	@ResponseBody
+	public String selectAll() {
+		List<Event> eventList=productService.getEvenetList();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		sb.append("\"eventList\":[");
+		for(int i=0;i<eventList.size();i++) {
+			Event event = eventList.get(i);
+			sb.append("{");
+			sb.append("\"event_id\":"+event.getEvent_id()+",");
+			sb.append("\"title\":\""+event.getTitle()+"\"");
+			if(i<eventList.size()-1) {
+				sb.append("},");
+			}else {
+				sb.append("}");
+			}
+		}
+		sb.append("]");
+		sb.append("}");
+		
+		return sb.toString();
+	}	
+	
+	//기존 상품을 기획상품으로 등록요청 처리 
+	@RequestMapping(value="admin/eventproduct/regist", method=RequestMethod.POST)
+	public String registEventProduct(EventProduct eventProduct, int[] product_id) {
+		
+		for(int i=0;i<product_id.length;i++) {
+			
+			Product product = new Product();
+			product.setProduct_id(product_id[i]);
+			eventProduct.setProduct(product);
+			productService.registEventProduct(eventProduct);
+		}
+		return "admin/product/index";
+	}
+	
 	
 	@ExceptionHandler({FileException.class, DMLException.class})
 	public ModelAndView handle(FileException e, DMLException e2) {

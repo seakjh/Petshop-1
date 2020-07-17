@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderDetail">
+
+	<resultMap type="OrderDetail" id="joinMap">
+		<id 		column="order_detail_id" 	property="order_detail_id"/>
+		<result 	column="ea" 						property="ea"/>
+		<association column="order_summary_id" 
+			property="orderSummary" javaType="OrderSummary" select="OrderSummary.select"/>
+		<association column="product_id" property="product" javaType="Product" select="Product.byId"/>			
+	</resultMap>
+	
 	
 	<insert id="insert" parameterType="OrderDetail">
 		insert into order_detail(order_detail_id
@@ -13,5 +22,18 @@
 			, #{ea})			
 	</insert>
 	
+	<select id="selectAll" parameterType="int" resultMap="joinMap">
+		select * from order_detail
+		where order_summary_id=#{order_summary_id}	
+	</select>	
 	
 </mapper>
+
+
+
+
+
+
+
+
+

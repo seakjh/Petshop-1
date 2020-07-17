@@ -29,14 +29,24 @@
 			from dual
 		</selectKey>
 	</insert>
-	
-			
 		
 	<select id="selectAll" resultMap="joinMap">
 		select * from order_summary 
 		order by order_summary_id desc
+	</select>
+	
+	<select id="select" parameterType="int" resultMap="joinMap">
+		select * from order_summary
+		where order_summary_id=#{order_summary_id}	
 	</select>		
 </mapper>
+
+
+
+
+
+
+
 
 
 

@@ -11,17 +11,17 @@
 		<result column="price" 				property="price"/>	
 		<result column="brand" 				property="brand"/>	
 		<result column="filename" 			property="filename"/>	
-		<association column="category_id" javaType="Category" property="category" select="Category.select"/>
+		<association column="category_id" 	javaType="Category" 	property="category" select="Category.select"/>
 	</resultMap>
 	
 	<sql id="select">
 		select * from product
 	</sql>
 	
-	<select id="All" resultMap="categoryJoin">
-		<include refid="select"/> order by product_id desc
+	<select id="All" resultMap="categoryJoin">		
+		<include refid="select"/> order by product_id desc 
 	</select>	
-		
+			
 	<select id="byId" parameterType="int" resultMap="categoryJoin">
 		<include refid="select"/>where product_id=#{product_id}
 	</select>
